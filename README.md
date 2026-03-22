@@ -47,5 +47,4 @@ This project focuses on application of python flask for creation of the website
 
 ## Find a bug?
 If you found an issue or would like to submit an improvement to this project, please submit an issue using the issues tab above.
-If you found an issue or would like to submit an improvement to this project, please submit an issue using the issues tab above.
 
