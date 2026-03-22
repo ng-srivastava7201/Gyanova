@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome {{ current_user.name }}</h1>
+
+<h2>Browse Content</h2>
+
+<form method="GET" class="mb-4">
+  <div class="row">
+
+    <div class="col-md-3 mb-2">
+      <label for="subject"><strong>Subject</strong></label>
+      <select name="subject" id="subject" class="form-control">
+        <option value="">All Subjects</option>
+        {% for s in subjects %}
+          <option value="{{ s }}" {% if s == selected_subject %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-2">
+      <label for="chapter"><strong>Chapter</strong></label>
+      <select name="chapter" id="chapter" class="form-control">
+        <option value="">All Chapters</option>
+        {% for c in chapters %}
+          <option value="{{ c }}" {% if c == selected_chapter %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-2">
+      <label for="teacher"><strong>Teacher</strong></label>
+      <select name="teacher" id="teacher" class="form-control">
+        <option value="">All Teachers</option>
+        {% for t in teachers %}
+          <option value="{{ t }}" {% if t == selected_teacher %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-2">
+      <label for="school"><strong>School</strong></label>
+      <select name="school" id="school" class="form-control">
+        <option value="">All Schools</option>
+        {% for sc in schools %}
+          <option value="{{ sc }}" {% if sc == selected_school %}selected{% endif %}>{{ sc }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <button type="submit" class="btn btn-dark mr-2">Apply Filters</button>
+      <a href="{{ url_for('views.student_dashboard') }}" class="btn btn-outline-secondary">Clear</a>
+    </div>
+  </div>
+</form>
+
+<hr>
+
+{% if contents %}
+  {% for item in contents %}
+    <div class="mb-3">
+      <h5>{{ item.subject }} — {{ item.chapter }}</h5>
+      <p class="mb-1 text-muted">By {{ item.teacher_name }}</p>
+
+      {% if item.filename %}
+        <a href="{{ url_for('views.preview', content_id=item.id) }}" class="btn btn-sm btn-primary mr-2">Preview</a>
+        <a href="{{ url_for('views.download_file', content_id=item.id) }}" class="btn btn-sm btn-secondary mr-2">Download</a>
+      {% endif %}
+
+      {% if item.youtube_link %}
+        <a href="{{ item.youtube_link }}" target="_blank" class="btn btn-sm btn-danger">Watch Video</a>
+      {% endif %}
+    </div>
+    <hr>
+  {% endfor %}
+{% else %}
+  <p>No content found for the selected filters.</p>
+{% endif %}
+
+{% endblock %}

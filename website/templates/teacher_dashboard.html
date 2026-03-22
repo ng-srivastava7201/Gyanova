@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome {{ user.name }} (Teacher)</h1>
+
+<ul>
+    <li><a href="/upload">Upload Notes / Videos</a></li>
+</ul>
+
+<h2>Your Recent Uploads</h2>
+
+{% if uploads %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>File</th>
+                <th>YouTube</th>
+                <th>Uploaded On</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in uploads %}
+            <tr>
+                <td>{{ item.subject }}</td>
+                <td>{{ item.chapter }}</td>
+                <td>
+                    {% if item.filename %}
+                        <a href="{{ url_for('views.preview', content_id=item.id) }}">{{ item.filename }}</a>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.youtube_link %}
+                        <a href="{{ item.youtube_link }}" target="_blank">Watch</a>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td>{{ item.upload_date.strftime('%d %b %Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You haven't uploaded anything yet.</p>
+{% endif %}
+
+{% endblock %}
