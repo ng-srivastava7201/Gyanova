@@ -1,5 +1,7 @@
 # Gyanova
-This project focuses on application of python flask for creation of the website
+Gyanova is a web-based teacher–student portal built using Python Flask that enables teachers to upload notes and educational resources, while allowing students to access, filter, and download them easily. The platform provides a simple and organized system for sharing study materials based on subjects, chapters, teachers, and schools, making learning more accessible and efficient.
+
+It also addresses key challenges faced by teachers by allowing one-time digital uploads of notes, eliminating the need to repeatedly share the same material with every new batch. Additionally, it removes the burden of physically storing notes for long periods, as all resources are securely maintained online and can be accessed anytime, ensuring long-term availability and convenience.
 
 ## Outcome of the project
   - a user can sign-up as a student or a teacher
